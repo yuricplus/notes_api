@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./database/config');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 class App {
   express: any;
@@ -11,8 +12,8 @@ class App {
     this.middlewares();
     this.routes();
 
-    this.express.listen(3001, () =>
-      console.log(`Running in 3001 `)
+    this.express.listen(8080, () =>
+      console.log(`Running in 8080 `)
     );
   }
 
@@ -22,6 +23,7 @@ class App {
 
   middlewares() {
     this.express.use(express.json());
+    this.express.use(cors())
   }
 
   routes() {

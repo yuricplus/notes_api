@@ -17,6 +17,10 @@ const NoteSchema = mongodb.Schema(
     date: {
       type: String,
       require: true
+    },
+    id: {
+      type: String,
+      require: true
     }
   }
 )

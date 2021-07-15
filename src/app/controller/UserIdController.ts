@@ -23,12 +23,13 @@ class UserIdController {
   };
 
   async index(req:object, res:any) {
+    console.log('oii')
     try {
       const data = await UserId.find({});
 
       return res.json(data)
     } catch (error) {
-      return res.json({"error": 'error'}) 
+      return res.json({error}) 
     }
   }
 }

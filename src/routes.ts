@@ -12,4 +12,7 @@ routes.get("/notes/:id", NotesController.store);
 
 routes.post("/notes", NotesController.create)
 
+routes.delete("/notes/:id", NotesController.delete)
+routes.put("/notes", NotesController.delete)
+
 module.exports = routes;
