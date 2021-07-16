@@ -22,15 +22,17 @@ class UserIdController {
     }
   };
 
-  async index(req:object, res:any) {
-    console.log('oii')
-    try {
-      const data = await UserId.find({});
-
-      return res.json(data)
-    } catch (error) {
-      return res.json({error}) 
+  async index(req:any, res:any) {
+    const { id } = req.params;
+    const user = await UserId.findOne({id})
+    if(!user) {
+      return res.status(400).json(
+        {
+          error: "This Id alredy exist"
+        }
+      )
     }
+    return res.status(200).json({succes: true})
   }
 }
 

@@ -4,7 +4,7 @@ const routes = router.Router();
 const UserIdController = require('./app/controller/UserIdController');
 const NotesController = require('./app/controller/NotesController')
 
-routes.get("/user", UserIdController.index);
+routes.get("/user/:id", UserIdController.index);
 
 routes.post("/user", UserIdController.store);
 
