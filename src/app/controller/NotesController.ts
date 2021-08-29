@@ -37,10 +37,10 @@ class NotesController {
   }
 
   async delete(req: any, res:any) {
-    const { id } = req.body;
+    const { id } = req.params;
     
     try {
-      await UserIdModel.findOne({id}).delete();
+      await NoteModel.deleteOne({id: id});
 
       return res.json({success: true})
     } catch (error) {
@@ -49,18 +49,23 @@ class NotesController {
   }
 
   async edit(req: any, res:any) {
-    const { id } = req.body;
+    const { title, note } = req.body;
+    const { id } = req.params;
     
     try {
-      await UserIdModel.findOne({id});
+      await NoteModel.findOne({id}, (err, doc) => {
+        doc.title = title;
+        doc.note = note;
+        doc.save()
+      })
 
       return res.json({success: true})
     } catch (error) {
-      return res.json({error: true})
+      return res.json({error})
     }
   }
 }
 
 module.exports = new NotesController();
 
-export {}
+export {} 

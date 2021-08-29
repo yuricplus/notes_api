@@ -1,4 +1,6 @@
 const UserId = require('../model/UserId');
+const NoteModel = require('../model/Note');
+const crypto = require('crypto')
 
 class UserIdController {
   async store(req: any, res: any) {
@@ -13,6 +15,17 @@ class UserIdController {
         )
       }
       const data = await UserId.create(req.body)
+      const idNote = crypto.randomBytes(6).toString('HEX');
+    
+      const notes = new NoteModel({
+        id: idNote,
+        note: '',
+        date: new Date(),
+        author: id,
+        title: 'Untitled'
+      });
+
+      await notes.save();
   
       return res.json(data)
     } catch (error) {
