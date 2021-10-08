@@ -12,8 +12,8 @@ class App {
     this.middlewares();
     this.routes();
 
-    this.express.listen(8080, () =>
-      console.log(`Running in 8080 `)
+    this.express.listen(5000, () =>
+      console.log(`Running in 5000 `)
     );
   }
 
