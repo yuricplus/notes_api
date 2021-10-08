@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongo = require('mongoose');
+const Schema = mongo.Schema;
 const UserIdSchema = new mongo.Schema({
     id: {
         type: String,
@@ -17,7 +18,13 @@ const UserIdSchema = new mongo.Schema({
     dateTodelete: {
         type: String,
         required: false
-    }
+    },
+    notes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Notes'
+        }
+    ]
 });
 module.exports = mongo.model("UserId", UserIdSchema);
 //# sourceMappingURL=UserId.js.map

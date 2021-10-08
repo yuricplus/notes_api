@@ -4,11 +4,19 @@ const NoteSchema = mongodb.Schema({
         type: String,
         require: true
     },
+    author: {
+        type: String,
+        require: true
+    },
     note: {
         type: String,
         require: true
     },
     date: {
+        type: String,
+        require: true
+    },
+    id: {
         type: String,
         require: true
     }

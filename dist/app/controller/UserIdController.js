@@ -1,15 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserId = require('../model/UserId');
+const NoteModel = require('../model/Note');
+const crypto = require('crypto');
 class UserIdController {
     async store(req, res) {
+        const { id } = req.body;
         try {
-            if (await UserId.findOne({ id: req.body.id })) {
+            if (await UserId.findOne({ id })) {
                 return res.status(400).json({
-                    error: "This Id alredy taken"
+                    error: "This Id alredy exist"
                 });
             }
             const data = await UserId.create(req.body);
+            const idNote = crypto.randomBytes(6).toString('HEX');
+            const notes = new NoteModel({
+                id: idNote,
+                note: '',
+                date: new Date(),
+                author: id,
+                title: 'Untitled'
+            });
+            await notes.save();
             return res.json(data);
         }
         catch (error) {
@@ -20,13 +32,14 @@ class UserIdController {
     }
     ;
     async index(req, res) {
-        try {
-            const data = await UserId.find({});
-            return res.json(data);
+        const { id } = req.params;
+        const user = await UserId.findOne({ id });
+        if (!user) {
+            return res.status(400).json({
+                error: "This Id alredy exist"
+            });
         }
-        catch (error) {
-            return res.json({ "error": 'error' });
-        }
+        return res.status(200).json({ succes: true });
     }
 }
 module.exports = new UserIdController();
