@@ -7,7 +7,7 @@
     "start": "tsc && node dist/serve.js",
     "test": "echo \"Success: All test passed\" && exit 1",
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/serve.ts' -e ts",
-    "build": "nodemon --watch 'src/' --exec 'ts-node src/serve.ts' -e ts"
+    "build": "tsc && node dist/serve.js"
   },
   "keywords": [],
   "author": "",
