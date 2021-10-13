@@ -1,7 +1,8 @@
 const express = require('express');
 const db = require('./database/config');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
+const port = process.env.PORT || 5000;
 
 class App {
   express: any;
@@ -12,7 +13,7 @@ class App {
     this.middlewares();
     this.routes();
 
-    this.express.listen(5000, () =>
+    this.express.listen(port, () =>
       console.log(`Running in 5000 `)
     );
   }
